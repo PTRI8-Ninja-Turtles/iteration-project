@@ -15,8 +15,6 @@ function RoomCard( { info, id, username } ) {
   // create a new patch request function to add clicked user as "allowed user" to show all users in the room
   async function joinRoom () {
     const roomid = info._id;
-    console.log('this is room id', roomid);
-    console.log('this is logged in user id', username);
     const options = {method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({'newUser': `${username}`})};
     await fetch(`/api/rooms/newUser/${roomid}`, options);
   }
