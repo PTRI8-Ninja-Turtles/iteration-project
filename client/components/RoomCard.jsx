@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function RoomCard( { info, id } ) {
+function RoomCard( { info, id, username } ) {
   const [roomInfoBoolean, setRoomInfoBoolean] = useState(false);
   const [saved, setSaved] = useState(false);
 
@@ -10,6 +10,14 @@ function RoomCard( { info, id } ) {
   //   event.preventDefault();
   //   setName((prevName) => {return newName})
   // }
+
+  // create a new patch request function to add clicked user as "allowed user" to show all users in the room
+  async function joinRoom () {
+    console.log('this is logged in user id', username);
+    const options = {method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({'allowedUsers': `${username}`})};
+    await fetch('/api/users/saveroom', options);
+  }
+
 
   // function handleChange() {
   //   newName = event.target.value
@@ -50,7 +58,7 @@ function RoomCard( { info, id } ) {
       <p><span>Creator:  </span>{info.host.username} </p>
       <p><span>People Inside: </span>{info.allowedUsers} </p>
       <div id='main-button'>
-        <Link to='/main/room' state={{ info }}><Button variant='contained'>Join Room</Button></Link>
+        <Link to='/main/room' state={{ info }}><Button variant='contained' onClick={joinRoom}>Join Room</Button></Link>
         {!saved && <Button variant='contained' id="saveMyRoom" onClick={saveRoom}>Save</Button>}
         {saved && <Button variant='outlined' id="saveMyRoom">Saved!</Button>}
         <Button id="exitRoomInfo" onClick={showRoomInfo}>Back</Button>
