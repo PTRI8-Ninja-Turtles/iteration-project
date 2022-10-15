@@ -37,10 +37,8 @@ export default function Login({ setLoggedIn , loggedIn}) {
   };
 
   const signUp = async () => {
-    // check that fields are valid
-    if (!username || !nickname || !password) return setWarning(true);
     // post new user
-    await fetch('/api/users', {
+    const newUser = await fetch('/api/users', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -53,8 +51,18 @@ export default function Login({ setLoggedIn , loggedIn}) {
       })
     });
 
-    setLoggedIn(true);
-    navigate('/main/home');
+    if (newUser.status === 411) {
+      console.log('password too short');
+    }
+
+    if (newUser.status === 409) {
+      console.log('username taken');
+    }
+
+    if (newUser.status === 200) {
+      setLoggedIn(true);
+      navigate('/main/home');
+    }
   };
 
 
