@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap');
+
+
 #room-container {
   display: flex;
   flex-direction: column;
@@ -90,3 +93,27 @@
   background-color: white;
   height: fit-content;
 }
+
+/* New sidebar styling */
+
+#subj-btn {
+  border-radius: 0;
+  display: block;
+  border: 1px red solid;
+  background-color: rgb(162, 205, 242);
+  color: black;
+  font-family: 'Reenie Beanie', cursive;
+  font-size: 1.7rem;
+
+}
+
+.push-pin {
+  float: left;
+  border: 1px red solid;
+  color: rgb(48, 46, 44);
+}
+
+.push-pin:hover{
+    transition: transform 0.3s ease-in-out;
+    transform: rotateZ(-45deg) scale(2.5);
+  }
