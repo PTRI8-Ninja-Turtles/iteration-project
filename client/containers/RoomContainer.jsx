@@ -1,10 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import RoomCard from '../components/RoomCard';
-import { Button, Card, Typography} from '@mui/material';
+import RoomEditor from '../components/RoomEditorModal';
 
 function RoomContainer({ subject, id, username }) {
   const [rooms, setRooms] = useState([]);
+  const [addRoomModal, setModal] = useState(false);
+
+  const closeModal = (event) => {
+    event.preventDefault();
+    setModal(false);
+  };
   // roomcontainer will retrieve current subject from useContext
 
   // fetch new room cards when subject changes
@@ -26,7 +32,21 @@ function RoomContainer({ subject, id, username }) {
   });
 
   /* if there are no room cards to display, place a warning */
-  const noRooms = <Link to='/main/profile'><Button id='no-subject' className='warning'><Typography style={{color: 'red'}}>There are no rooms. Let&apos;s create one!</Typography></Button> </Link>;
+  // const noRooms = 
+  // <Link to='/main/profile'>
+  //   <Button id='no-subject' className='warning'>
+  //     <Typography style={{color: 'red'}}>There are no rooms. Let&apos;s create one!</Typography>
+  //   </Button> 
+  // </Link>;
+
+  const noRooms = 
+  <div>
+    {!addRoomModal ?
+      <button style={{cursor:'pointer'}}  id='no-subject' className='warning' onClick={() => setModal(true)}>
+        <Typography style={{color: 'red'}}>There are no rooms. Let&apos;s create one!</Typography>
+      </button>
+      : <RoomEditor closeModal={closeModal} action={'add'} />}
+  </div>;
 
   return (
     <div id='room-container'>
