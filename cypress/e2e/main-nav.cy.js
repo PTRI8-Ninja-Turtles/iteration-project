@@ -45,7 +45,7 @@ context('main navbar', () => {
     cy.get('#open-add-room').click();
     cy.get('#subject-select').type('Science{enter}');
     cy.get('#room-editor-modal-btns > button').contains('Add new room').click();
-    cy.get('#room-editor-modal-btns > button').contains('Cancel').click();
+    // cy.get('#room-editor-modal-btns > button').contains('Cancel').click();
     cy.get('.profile-room > p').contains('science').should('be.visible');
 
     cy.get('#open-room-btn').click();
@@ -70,7 +70,7 @@ context('main navbar', () => {
     cy.get('#open-add-room').click();
     cy.get('#subject-select').type('Miscellaneous{enter}');
     cy.get('#room-editor-modal-btns > button').contains('Add new room').click();
-    cy.get('#room-editor-modal-btns > button').contains('Cancel').click();
+    // cy.get('#room-editor-modal-btns > button').contains('Cancel').click();
 
     // join room
     cy.get('#home-link').click();
