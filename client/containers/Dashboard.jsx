@@ -55,7 +55,7 @@ function Dashboard( ) {
                   <SettingsCard/>
                 </div>
               </div>}/>
-              <Route path='/room' element={<Room />} />
+              <Route path='/room/*' element={<Room username={loggedIn.username}/>} />
             </Routes>
           </>} />}
           <Route path="*" element={<Navigate to='/' />} />

@@ -59,7 +59,7 @@ function RoomCard( { info, id, username } ) {
       <p><span>Creator:  </span>{info.host.username} </p>
       <p><span>People who visted: </span>{info.allowedUsers} </p>
       <div id='main-button'>
-        <Link to='/main/room' state={{ info }}><Button variant='contained' onClick={joinRoom}>Join Room</Button></Link>
+        <Link to={`/main/room/${info._id}`} state={{ info }}><Button variant='contained' onClick={joinRoom}>Join Room</Button></Link>
         {!saved && <Button variant='contained' id="saveMyRoom" onClick={saveRoom}>Save</Button>}
         {saved && <Button variant='outlined' id="saveMyRoom">Saved!</Button>}
         <Button id="exitRoomInfo" onClick={showRoomInfo}>Back</Button>

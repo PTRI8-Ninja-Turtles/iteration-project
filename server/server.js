@@ -62,9 +62,10 @@ app.use('/', express.static(path.resolve(__dirname, '../build')));
 
 io.on('connection', (socket)=>{
   console.log('client connected');
+  socket.emit('message', 'welcome to chatcord!');
   // console.log(socket)
 
-  // socket.emit('connection', null)
+  socket.emit('connection', null);
 });
 
 
