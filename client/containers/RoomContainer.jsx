@@ -43,9 +43,9 @@ function RoomContainer({ subject, id, username }) {
   <div>
     {!addRoomModal ?
       <button style={{cursor:'pointer'}}  id='no-subject' className='warning' onClick={() => setModal(true)}>
-        <Typography style={{color: 'red'}}>There are no rooms. Let&apos;s create one!</Typography>
+        <Typography style={{color: 'red'}}>There are no rooms for {subject}. Let&apos;s create one!</Typography>
       </button>
-      : <RoomEditor closeModal={closeModal} action={'add'} />}
+      : <RoomEditor closeModal={closeModal} action={'add'} sub={subject} />}
   </div>;
 
   return (

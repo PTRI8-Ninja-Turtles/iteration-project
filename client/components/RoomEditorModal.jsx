@@ -1,9 +1,10 @@
 import { Button, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useState } from 'react';
 
-function RoomEditor({ fetchUser, closeModal, action, id }) {
+function RoomEditor({ fetchUser, closeModal, action, id, sub }) {
+
   const [warning, setWarning] = useState(false);
-  const [updatedRoom, setRoom] = useState({subject: '', restricted: false});
+  const [updatedRoom, setRoom] = useState({subject: sub, restricted: false});
 
   // create function to add card via post req and update room list
   const addRoom = async () => {
@@ -72,11 +73,11 @@ function RoomEditor({ fetchUser, closeModal, action, id }) {
           label="Subject"
           onChange={event => setRoom({...updatedRoom, subject: event.target.value})}
         >
-          <MenuItem value={'english'}>English</MenuItem>
           <MenuItem value={'math'}>Math</MenuItem>
+          <MenuItem value={'english'}>English</MenuItem>
+          <MenuItem value={'history'}>History</MenuItem>
           <MenuItem value={'science'}>Science</MenuItem>
           <MenuItem value={'languages'}>Languages</MenuItem>
-          <MenuItem value={'history'}>History</MenuItem>
           <MenuItem value={'miscellaneous'}>Miscellaneous</MenuItem>
         </Select>
         {/* restrcited room is not functioning, so we decided to hide it */}
