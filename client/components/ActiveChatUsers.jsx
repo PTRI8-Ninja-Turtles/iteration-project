@@ -34,7 +34,7 @@ function ActiveChatUsers( ) {
           <ListItemIcon>
             <Avatar alt="Hannah P" src="https://www.codesmith.io/hs-fs/hubfs/Screen%20Shot%202022-04-05%20at%201.44.39%20PM.png?width=1046&height=1038&name=Screen%20Shot%202022-04-05%20at%201.44.39%20PM.png" />
           </ListItemIcon>
-          <ListItemText primary="Hanna P">Hannah P</ListItemText>
+          <ListItemText primary="Hannah P">Hannah P</ListItemText>
         </ListItem>
         <ListItem button key="MattB">
           <ListItemIcon>
