@@ -1,9 +1,10 @@
-import { Button, InputLabel, MenuItem, Select, Switch } from '@mui/material';
+import { Button, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useState } from 'react';
 
-function RoomEditor({ fetchUser, closeModal, action, id }) {
+function RoomEditor({ fetchUser, closeModal, action, id, sub }) {
+
   const [warning, setWarning] = useState(false);
-  const [updatedRoom, setRoom] = useState({subject: '', restricted: false});
+  const [updatedRoom, setRoom] = useState({subject: sub ? sub : 'math', restricted: false});
 
   // create function to add card via post req and update room list
   const addRoom = async () => {
@@ -53,7 +54,9 @@ function RoomEditor({ fetchUser, closeModal, action, id }) {
 
   const addRoomBtn = <Button variant='contained' onClick={(event) => {
     event.preventDefault();
-    addRoom();}}>Add new room</Button>;
+    addRoom();
+    closeModal(event);
+  }}>Add new room</Button>;
 
   const editRoomBtn = <Button variant='contained' onClick={(event) => {
     event.preventDefault();
@@ -70,15 +73,16 @@ function RoomEditor({ fetchUser, closeModal, action, id }) {
           label="Subject"
           onChange={event => setRoom({...updatedRoom, subject: event.target.value})}
         >
-          <MenuItem value={'english'}>English</MenuItem>
           <MenuItem value={'math'}>Math</MenuItem>
+          <MenuItem value={'english'}>English</MenuItem>
+          <MenuItem value={'history'}>History</MenuItem>
           <MenuItem value={'science'}>Science</MenuItem>
           <MenuItem value={'languages'}>Languages</MenuItem>
-          <MenuItem value={'history'}>History</MenuItem>
           <MenuItem value={'miscellaneous'}>Miscellaneous</MenuItem>
         </Select>
-        <label className='room-editor-label'>Restricted: </label>
-        <Switch onClick={() => setRoom({...updatedRoom, restricted: !updatedRoom.restricted})} />
+        {/* restrcited room is not functioning, so we decided to hide it */}
+        {/* <label className='room-editor-label'>Restricted: </label> */}
+        {/* <Switch onClick={() => setRoom({...updatedRoom, restricted: !updatedRoom.restricted})} /> */}
         {warning && <p className="warning">All fields must be filled!</p>}
       </form>
       <div id='room-editor-modal-btns'>

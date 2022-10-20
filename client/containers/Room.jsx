@@ -66,8 +66,11 @@ function Room( username ) {
       <div id='room-page-info'>
         <h2>Host: {info.host && (info.host.nickname || hostInfo.nickname)} </h2>
       </div>
-      <DocumentEditor hostView={hostView}/>
       <Chatbox username={username} />
+      {/* <DocumentEditor hostView={hostView}/> */}
+      <br />
+      <br />
+      <Chatbox />
       <br />
       <h3 align='center'>
         <a href='/main/home'>

@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
 const ActiveRooms = () => {
   const [rooms, setRooms] = useState([]);
@@ -56,4 +55,4 @@ const ActiveRooms = () => {
   );
 };
 
-export default ActiveRooms
+export default ActiveRooms;
