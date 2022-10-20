@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 function RoomEditor({ fetchUser, closeModal, action, id, sub }) {
 
   const [warning, setWarning] = useState(false);
-  const [updatedRoom, setRoom] = useState({subject: sub, restricted: false});
+  const [updatedRoom, setRoom] = useState({subject: sub ? sub : 'math', restricted: false});
 
   // create function to add card via post req and update room list
   const addRoom = async () => {

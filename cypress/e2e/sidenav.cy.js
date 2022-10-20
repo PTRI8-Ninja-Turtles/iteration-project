@@ -19,7 +19,7 @@ context('Testing for subjects navigation', () => {
         if (rc.find('.mainRoom').length > 0) {
           cy.get('.mainRoom')
         } else {
-          cy.get('p').contains('There are no rooms. Let\'s create one!')
+          cy.get('p').contains('Let\'s create one!')
         }
       })
       cy.wait('@allRoom').then(({response}) => {
