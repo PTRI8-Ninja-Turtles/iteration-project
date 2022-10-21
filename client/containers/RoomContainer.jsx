@@ -23,7 +23,7 @@ function RoomContainer({ subject, id, username }) {
 
   useEffect(() => {
     fetchRooms();
-  }, [rooms]);
+  }, [subject]);
 
 
   const roomCards = 
