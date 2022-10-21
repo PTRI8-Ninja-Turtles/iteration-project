@@ -36,10 +36,7 @@
   height: 15rem;
   width: 15rem;
   perspective: 1000px;
-  // border:rgb(88, 84, 84) solid;
-  // border-radius: rem;
   opacity: 1;
-  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
   align-items: center;
   justify-content: center;
@@ -100,12 +97,14 @@
 .grid-item-front {
   position: absolute;
 
-  p{
+
+  #active-room-name{
     font-family: 'Reenie Beanie', cursive;
     font-size: 3.5rem;
     padding: 1rem;
   }
 }
+
 
 // .grid-item-back {
 //   display:flex-col;
