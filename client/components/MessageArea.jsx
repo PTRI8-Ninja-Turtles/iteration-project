@@ -1,7 +1,6 @@
 import Send from '@mui/icons-material/Send';
 import { Divider, Fab, Grid, List, ListItem, ListItemText, TextField } from '@mui/material';
-import { styled } from '@mui/system';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import io from 'socket.io-client';
 const SERVER = 'http://127.0.0.1:3000';
 
@@ -16,40 +15,41 @@ socket.on('connection', (socket) => {
 
 const messages = [{content: 'Hey man, What\'s up ?', pos: 'left'}, {content: 'Hey, Iam Good! What about you ?', pos: 'right'}, {content: 'Cool. i am good, let\'s catch up!', pos: 'left'} ]; 
 
-const msgCmp = messages.map((val, i) => 
-  <ListItem key={i + 1}>
-    <Grid container>
-      <Grid item xs={12}>
-        <ListItemText align={val.pos} primary={val.content}></ListItemText>
-      </Grid>
-    </Grid>
-  </ListItem>
-);
-
-const formatMsg = (msg) => {
-  const key = msgCmp.length;
-  return (
-    <ListItem key={key}>
-      <Grid container>
-        <Grid item xs={12}>
-          <ListItemText align="right" primary={msg}></ListItemText>
-        </Grid>
-      </Grid>
-    </ListItem>
-  );
-};
-
-const useStyles = styled({
-  messageArea: {
-    height: '70vh',
-    overflowY: 'auto'
-  }
-});
+// const useStyles = styled({
+//   messageArea: {
+//     height: '70vh',
+//     overflowY: 'auto'
+//   }
+// });
   
 
 function MessageArea( username ) {
   const [newMessage, setNewMsg] = useState('');
-  const classes = useStyles();
+  const [allMsg, setAllMsg] = useState(messages);
+
+  const msgCmp = allMsg.map((val, i) => 
+    <ListItem key={i + 1}>
+      <Grid container>
+        <Grid item xs={12}>
+          <ListItemText align={val.pos} primary={val.content}></ListItemText>
+        </Grid>
+      </Grid>
+    </ListItem>
+  );
+
+  const formatMsg = (msg) => {
+    const key = msgCmp.length;
+    return (
+      <ListItem key={key}>
+        <Grid container>
+          <Grid item xs={12}>
+            <ListItemText align="right" primary={msg}></ListItemText>
+          </Grid>
+        </Grid>
+      </ListItem>
+    );
+  };
+  // const classes = useStyles();
 
   // useEffect(() => {
   // }, [msgCmp]);
@@ -57,18 +57,22 @@ function MessageArea( username ) {
   const sendMsg = (e) => {
     console.log('inside sendMsg', newMessage);
     const msg = newMessage;
-    // socket.emit('chat message', (msg) => {
+    // socket.on('chat message', (msg) => {
     //   console.log('inside of socketon from frontend');
     //   const newMsg = formatMsg(msg);
     //   msgCmp.push(newMsg);
     // });
 
     socket.emit('chat message', msg);
+
+    // should update all the msg
+    setAllMsg([...allMsg, {content: msg,  pos: 'right'}]);
   };
 
   return (
     <Grid item xs={9}>
-      <List className={classes.messageArea} id='msgArea' >
+      <List id='msgArea' >
+        {/* <List className={classes.messageArea} id='msgArea' > */}
         {msgCmp}
       </List>
       <Divider />
