@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
-import io from 'socket.io-client';
-import { styled } from '@mui/system';
-import { Grid, ListItem, List, Avatar, ListItemIcon, ListItemText, Divider, TextField, Fab} from '@mui/material';
 import Send from '@mui/icons-material/Send';
+import { Divider, Fab, Grid, List, ListItem, ListItemText, TextField } from '@mui/material';
+import { styled } from '@mui/system';
+import React, { useEffect, useState } from 'react';
+import io from 'socket.io-client';
 const SERVER = 'http://127.0.0.1:3000';
 
 import '../stylesheets/main.scss';
@@ -12,6 +12,7 @@ const socket = io.connect(SERVER);
 socket.on('connection', (socket) => {
   console.log('connected with front end');
 } );
+
 
 const messages = [{content: 'Hey man, What\'s up ?', pos: 'left'}, {content: 'Hey, Iam Good! What about you ?', pos: 'right'}, {content: 'Cool. i am good, let\'s catch up!', pos: 'left'} ]; 
 
@@ -50,14 +51,19 @@ function MessageArea( username ) {
   const [newMessage, setNewMsg] = useState('');
   const classes = useStyles();
 
+  // useEffect(() => {
+  // }, [msgCmp]);
+
   const sendMsg = (e) => {
     console.log('inside sendMsg', newMessage);
     const msg = newMessage;
-    socket.on('chat message', (msg) => {
-      console.log('inside of socketon from frontend');
-      const newMsg = formatMsg(msg);
-      msgCmp.push(newMsg);
-    });
+    // socket.emit('chat message', (msg) => {
+    //   console.log('inside of socketon from frontend');
+    //   const newMsg = formatMsg(msg);
+    //   msgCmp.push(newMsg);
+    // });
+
+    socket.emit('chat message', msg);
   };
 
   return (
