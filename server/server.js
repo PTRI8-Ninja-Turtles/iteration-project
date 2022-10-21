@@ -64,7 +64,7 @@ io.on('connection', (socket)=>{
   console.log('client connected on the back end');
   socket.emit('message', 'welcome to chatcord!');
   socket.on('chat message', (msg) => {
-    io.emit('chat message', msg);
+    io.emit('message', msg);
     console.log(`chat message log ${socket.id} ${msg}`);
   });
   // console.log(socket)

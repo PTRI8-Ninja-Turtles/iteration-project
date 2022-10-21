@@ -1,16 +1,12 @@
 import Send from '@mui/icons-material/Send';
 import { Divider, Fab, Grid, List, ListItem, ListItemText, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 const SERVER = 'http://127.0.0.1:3000';
 
 import '../stylesheets/main.scss';
 
 const socket = io.connect(SERVER);
-
-socket.on('connection', (socket) => {
-  console.log('connected with front end');
-} );
 
 
 const messages = [{content: 'Hey man, What\'s up ?', pos: 'left'}, {content: 'Hey, Iam Good! What about you ?', pos: 'right'}, {content: 'Cool. i am good, let\'s catch up!', pos: 'left'} ]; 
@@ -24,8 +20,15 @@ const messages = [{content: 'Hey man, What\'s up ?', pos: 'left'}, {content: 'He
   
 
 function MessageArea( username ) {
-  const [newMessage, setNewMsg] = useState('');
+  const [newMessage, setNewMsg] = useState('test');
   const [allMsg, setAllMsg] = useState(messages);
+
+  useEffect(() => {
+    socket.on('connection', (socket) => {
+      console.log('connected!');
+      socket.emit('chat message', 'test');
+    } );
+  }, []);
 
   const msgCmp = allMsg.map((val, i) => 
     <ListItem key={i + 1}>
@@ -51,23 +54,20 @@ function MessageArea( username ) {
   };
   // const classes = useStyles();
 
-  // useEffect(() => {
-  // }, [msgCmp]);
+
 
   const sendMsg = (e) => {
     console.log('inside sendMsg', newMessage);
     const msg = newMessage;
-    // socket.on('chat message', (msg) => {
-    //   console.log('inside of socketon from frontend');
-    //   const newMsg = formatMsg(msg);
-    //   msgCmp.push(newMsg);
-    // });
 
     socket.emit('chat message', msg);
-
-    // should update all the msg
-    setAllMsg([...allMsg, {content: msg,  pos: 'right'}]);
+    setNewMsg('');
   };
+
+  socket.on('message', message => {
+    console.log('msg getting from front end ->', message);
+    setAllMsg([...allMsg, {content: message,  pos: 'left'}]);
+  });
 
   return (
     <Grid item xs={9}>
@@ -78,7 +78,7 @@ function MessageArea( username ) {
       <Divider />
       <Grid container style={{padding: '20px'}}>
         <Grid item xs={11}>
-          <TextField id="outlined-basic-email" onChange={ e=>setNewMsg(e.target.value)} label="Type Something" fullWidth />
+          <TextField id="outlined-basic-email" onChange={ e=>setNewMsg(e.target.value)} value={newMessage} label="Type Something" fullWidth />
         </Grid>
         <Grid xs={1} align="right">
           <Fab color="primary" aria-label="add"><Send onClick={sendMsg}/></Fab>
