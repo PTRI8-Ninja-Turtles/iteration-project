@@ -56,8 +56,10 @@ function Dashboard( ) {
                 <div id="login-details-container">
                   <SettingsCard/>
                 </div>
+              </div>}/>
+              <Route path='/room/*' element={<Room username={loggedIn.username}/>} />
               </div>}/> */}
-              <Route path='/room' element={<Room />} />
+              <Route path='/room/*' element={<Room username={loggedIn.username}/>} />
               <Route path='/*' element={<ErrorPage/>} />
             </Routes>
           </>} />}

@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Chatbox from '../components/Chatbox';
-// import DocumentEditor from '../components/DocumentEditor';
+import DocumentEditor from '../components/DocumentEditor';
+import io from 'socket.io-client';
+const SERVER = 'http://127.0.0.1:3000';
 
-function Room( ) {
+const socket = io.connect(SERVER);
+
+
+function Room( username ) {
   const [hostInfo, setHost] = useState({});
   const [hostView, setHostView] = useState(false);
   const [info, setInfo] = useState({});
@@ -61,10 +66,11 @@ function Room( ) {
       <div id='room-page-info'>
         <h2>Host: {info.host && (info.host.nickname || hostInfo.nickname)} </h2>
       </div>
+      <br />
+      <br />
+      <Chatbox username={username} />
       {/* <DocumentEditor hostView={hostView}/> */}
-      <br />
-      <br />
-      <Chatbox />
+      {/* <Chatbox /> */}
       <br />
       <h3 align='center'>
         <a href='/main/home'>
