@@ -10,21 +10,22 @@ const ActiveRooms = () => {
     else setRooms([]);
 
 
-    let [ temp, users ] = '';
+    let [ temp, users, subject ] = '';
     const usersArr = [];
 
     for (let i = 0; i < roomData.length; i++){
       // console.log(roomData[i]);
       temp = roomData[i];
-      users = temp['allowedUsers'];
-      usersArr.push(...users);
+      users = temp.host.nickname;
+      subject = temp.subject;
+      usersArr.push(`${users}'s ${subject}`);
     }
   
     const noDupesUsersArr = [...new Set(usersArr)];
     if (noDupesUsersArr[0] === 'undefined') noDupesUsersArr.shift();
 
-    setUsers(noDupesUsersArr);
-    console.log(noDupesUsersArr);
+    setUsers(usersArr);
+    
 
   };
 
@@ -47,7 +48,7 @@ const ActiveRooms = () => {
         {rooms.map((rooms, i) => (
           <div className='grid-item' key={i}>
             <div className='grid-item-front'>
-              <p id='active-room-name'>{users[i]}'s Room</p>
+              <p id='active-room-name'>{users[i]} Room</p>
               {/* <p>Room {i + 1}</p> */}
 
               {/* we want to add description of room but make the font smaller */}
