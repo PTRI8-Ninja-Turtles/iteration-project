@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 // components
+import ActiveRooms from '../components/ActiveRooms';
+import ErrorPage from '../components/ErrorPage';
 import Login from '../components/Login';
 import MainNav from '../components/MainNav';
-import SettingsCard from '../components/SettingsCard';
 import SubjectNav from '../components/SubjectNav';
 import Profile from './Profile';
 import Room from './Room';
 import RoomContainer from './RoomContainer';
-import SettingsContainer from './SettingsContainer';
-import ActiveRooms from '../components/ActiveRooms';
-const SERVER = "http://127.0.0.1:8080";
+// import SettingsCard from '../components/SettingsCard';
+// import SettingsContainer from './SettingsContainer';
+const SERVER = 'http://127.0.0.1:8080';
 
 
 function Dashboard( ) {
- <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
+  <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>;
 
  
   const [subject, setSubject] = useState('');
@@ -49,13 +50,15 @@ function Dashboard( ) {
                 </div>}
               />
               <Route path='/profile' element={<Profile />} />
-              <Route path='/settings' element={<div id='main-container'>
+              {/* since setting is not functioning, so we decided to hide it */}
+              {/* <Route path='/settings' element={<div id='main-container'>
                 <SettingsContainer />
                 <div id="login-details-container">
                   <SettingsCard/>
                 </div>
-              </div>}/>
+              </div>}/> */}
               <Route path='/room' element={<Room />} />
+              <Route path='/*' element={<ErrorPage/>} />
             </Routes>
           </>} />}
           <Route path="*" element={<Navigate to='/' />} />

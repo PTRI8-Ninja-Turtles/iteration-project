@@ -57,12 +57,23 @@ export default function Login({ setLoggedIn , loggedIn}) {
     }
   };
 
+  const onEnterLogin = event => {
+    if (event.key === 'Enter') {
+      logIn();
+    }
+  };
+
+  const onEnterSignUp = event => {
+    if (event.key === 'Enter') {
+      signUp();
+    }
+  };
 
   const loginDetails = (
     <div className="auth-container details-container">
       <h2 id="login-text">Login Details</h2>
-      <TextField label="Username" onChange={(event) => setUsername(event.target.value)} />
-      <TextField type='password' label="Password" onChange={(event) => setPassword(event.target.value)} />
+      <TextField label="Username" onChange={(event) => setUsername(event.target.value)} onKeyDown={onEnterLogin} />
+      <TextField type='password' label="Password" onChange={(event) => setPassword(event.target.value)} onKeyDown={onEnterLogin} />
       {warning && <p className='warning'>{msg}</p>}
       <Button onClick={logIn} variant="contained" id='auth-btn'>Login</Button>
       
@@ -72,9 +83,9 @@ export default function Login({ setLoggedIn , loggedIn}) {
   const signupDetails = (
     <div className="auth-container  details-container">
       <h2 id="login-text">Signup Details</h2>
-      <TextField label="Username" onChange={(event) => setUsername(event.target.value)} />
-      <TextField label="Nickname" onChange={(event) => setNickname(event.target.value)} />
-      <TextField type='password' placeholder='Must be at least 8 characters' label="Password"  onChange={(event) => setPassword(event.target.value)} />
+      <TextField label="Username" onChange={(event) => setUsername(event.target.value)} onKeyDown={onEnterSignUp} />
+      <TextField label="Nickname" onChange={(event) => setNickname(event.target.value)} onKeyDown={onEnterSignUp} />
+      <TextField type='password' placeholder='Must be at least 8 characters' label="Password"  onChange={(event) => setPassword(event.target.value)} onKeyDown={onEnterSignUp} />
       {warning && <p className='warning'>{msg}</p>}
       <Button onClick={signUp} variant="contained" id='auth-btn'>Signup</Button>
       <p>{'Already have an account?'} <span className='switch-auth' onClick={() => setSignup(false)}>Click here!</span></p>

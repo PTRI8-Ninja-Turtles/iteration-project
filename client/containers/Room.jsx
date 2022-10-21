@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Chatbox from '../components/Chatbox';
-import DocumentEditor from '../components/DocumentEditor';
+// import DocumentEditor from '../components/DocumentEditor';
 
 function Room( ) {
   const [hostInfo, setHost] = useState({});
@@ -61,11 +61,16 @@ function Room( ) {
       <div id='room-page-info'>
         <h2>Host: {info.host && (info.host.nickname || hostInfo.nickname)} </h2>
       </div>
-      <DocumentEditor hostView={hostView}/>
+      {/* <DocumentEditor hostView={hostView}/> */}
+      <br />
+      <br />
       <Chatbox />
-      <a href='/main/home'>
-        <button id='exit-room-btn'>Exit Room</button>
-      </a>
+      <br />
+      <h3 align='center'>
+        <a href='/main/home'>
+          <button id='exit-room-btn'>Exit Room</button>
+        </a>
+      </h3>
     </div>
   );
 }
