@@ -47,7 +47,7 @@ const ActiveRooms = () => {
         {rooms.map((rooms, i) => (
           <div className='grid-item' key={i}>
             <div className='grid-item-front'>
-              <p>{users[i]}'s Room</p>
+              <p id='active-room-name'>{users[i]}'s Room</p>
               {/* <p>Room {i + 1}</p> */}
 
               {/* we want to add description of room but make the font smaller */}
