@@ -24,7 +24,7 @@ const ActiveRooms = () => {
     if (noDupesUsersArr[0] === 'undefined') noDupesUsersArr.shift();
 
     setUsers(noDupesUsersArr);
-    
+    console.log(noDupesUsersArr);
 
   };
 
