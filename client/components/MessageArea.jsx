@@ -8,9 +8,6 @@ import '../stylesheets/main.scss';
 
 const socket = io.connect(SERVER);
 
-
-const messages = [{content: 'Hey man, What\'s up ?', pos: 'left'}, {content: 'Hey, Iam Good! What about you ?', pos: 'right'}, {content: 'Cool. i am good, let\'s catch up!', pos: 'left'} ]; 
-
 // const useStyles = styled({
 //   messageArea: {
 //     height: '70vh',
@@ -19,26 +16,28 @@ const messages = [{content: 'Hey man, What\'s up ?', pos: 'left'}, {content: 'He
 // });
   
 
-function MessageArea( username ) {
-  const [newMessage, setNewMsg] = useState('test');
-  const [allMsg, setAllMsg] = useState(messages);
+function MessageArea( {username, info} ) {
+  const [newMessage, setNewMsg] = useState('');
+  const [allMsg, setAllMsg] = useState([]);
+
 
   useEffect(() => {
-    socket.on('connection', (socket) => {
-      console.log('connected!');
-      socket.emit('chat message', 'test');
-    } );
   }, []);
 
-  const msgCmp = allMsg.map((val, i) => 
-    <ListItem key={i + 1}>
-      <Grid container>
-        <Grid item xs={12}>
-          <ListItemText align={val.pos} primary={val.content}></ListItemText>
+  const msgCmp = allMsg.map((val, i) => {
+    const pos =  val.un === username ? 'right' : 'left'; 
+    return (
+      <ListItem key={i + 1}>
+        <Grid container>
+          <Grid item xs={12}>
+            <ListItemText align={pos} primary={val.content}></ListItemText>
+          </Grid>
+          <Grid item xs={12}>
+            <ListItemText align={pos} secondary={val.un}></ListItemText>
+          </Grid>
         </Grid>
-      </Grid>
-    </ListItem>
-  );
+      </ListItem>);
+  });
 
   const formatMsg = (msg) => {
     const key = msgCmp.length;
@@ -54,19 +53,19 @@ function MessageArea( username ) {
   };
   // const classes = useStyles();
 
-
+  socket.on('connect', (socket) => {
+    console.log('connect to socket - client')
+  });
 
   const sendMsg = (e) => {
-    console.log('inside sendMsg', newMessage);
     const msg = newMessage;
-
-    socket.emit('chat message', msg);
+    socket.emit('chat message', {content: msg, un: username});
     setNewMsg('');
   };
 
   socket.on('message', message => {
-    console.log('msg getting from front end ->', message);
-    setAllMsg([...allMsg, {content: message,  pos: 'left'}]);
+    // console.log('msg getting from front end ->', message);
+    setAllMsg([...allMsg, {content: message.content, un: message.un}]);
   });
 
   return (

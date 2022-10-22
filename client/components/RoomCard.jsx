@@ -7,23 +7,12 @@ function RoomCard( { info, id, username } ) {
   const [roomInfoBoolean, setRoomInfoBoolean] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  // const textOnSubmit = event => {
-  //   event.preventDefault();
-  //   setName((prevName) => {return newName})
-  // }
-
   // create a new patch request function to add clicked user as "allowed user" to show all users in the room
   async function joinRoom () {
     const roomid = info._id;
     const options = {method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({'newUser': `${username}`})};
     await fetch(`/api/rooms/newUser/${roomid}`, options);
   }
-
-
-  // function handleChange() {
-  //   newName = event.target.value
-  //   return event.target.value
-  // }
 
   async function saveRoom () {
     const options = {method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({'savedRooms': `${info._id}`})};
