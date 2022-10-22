@@ -18,7 +18,7 @@ function SubjectNav({ subject, setSubject }) {
 
   const subjectBtns = subjects.map((e, i) => {
     return (
-      <Button variant='text'
+      <Button variant='outlined'
         key={i}
         value={e[0]}
         id='subject-links'
@@ -36,10 +36,10 @@ function SubjectNav({ subject, setSubject }) {
 
   return (
     <div className='subject-nav'>
-      <h2 >Subjects</h2>
+      {/* <h2 >Subjects</h2> */}
       <div id='subject-links-container'>
         {subjectBtns}
-        <Button id='subj-btn' variant="contained" startIcon={<PushPinIcon className='push-pin' />}>Test</Button>
+        {/* <Button id='subj-btn' variant="contained" startIcon={<PushPinIcon className='push-pin' />}>Test</Button> */}
       </div>
 
     </div>

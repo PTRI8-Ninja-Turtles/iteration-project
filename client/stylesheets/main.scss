@@ -47,8 +47,8 @@ button:hover {
   background-color: transparent;
   background-position: 30px;
   background-size: 15px 15px;
-  height: 100%;
-  width: 100%;
+  height: auto;
+  width: auto;
 }
 
 .main-nav {
@@ -59,29 +59,48 @@ button:hover {
   border-bottom: 1px solid $accent-color-light;
 }
 
-.logoutbtn {
+.main-nav-btns {
  margin-left: auto;
  padding-right: 1em;
+ font-family: 'Kalam', cursive;
 }
 
-.main-nav-btn {
-  margin: 0 10px;
+.logout-btn {
+  margin: 0 5px;
+}
+
+.profile.btn {
+  font-family: 'Kalam', cursive;
+}
+
+#profile-link {
+  color: black;
+  font-family: 'Kalam', cursive;
 }
 
 .logo {
   font-family: 'Rubik', sans-serif;
-  font-size: 24px;
+  font-size: 34px;
   font-weight: 400;
-  padding: 5px;
-  margin-left: 20px;
+  padding: 15px;
+  margin-left: 40px;
+  color: black;
   span {
     font-weight: 300;
   }
+  p{
+    justify-items: center;
+  }
+}
+
+#logo-container {
+  float: center;
 }
 
 #logout-link {
   color: $warning-color;
   text-align: right;
+  font-family: 'Kalam', cursive;
   // flex: 1;
   // justify-self: end;
 }
