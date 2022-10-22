@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const ActiveRooms = () => {
   const [users, setUsers] = useState([]);
@@ -45,18 +46,20 @@ const ActiveRooms = () => {
       <h1>Current Active Rooms</h1>
       {/* grid item */}
       <div className='grid-container'>
-        {rooms.map((rooms, i) => (
+        {rooms.map((info, i) => (
           <div className='grid-item' key={i}>
             <div className='grid-item-front'>
-              <p id='active-room-name'>{users[i]} Room</p>
+              <p id='active-room-name'>{users[i]} room</p>
               {/* <p>Room {i + 1}</p> */}
 
               {/* we want to add description of room but make the font smaller */}
               {/* <p>{rooms.host.nickname}&apos;s {rooms.subject} Room</p> */}
 
-              <a href='/main/home'>
+              {/* <a href='/main/home'>
                 <button className='join-btn'>JOIN</button>
-              </a>
+              </a> */}
+
+              <Link to={`/main/room/${info._id}`} state={{ info }}><button className = 'join-btn' >Join Room</button></Link>
 
             </div>
             {/* hover effect */}

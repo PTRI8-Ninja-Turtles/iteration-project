@@ -1,26 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
 
 
 #room-container {
-  display: flex;
-  flex-direction: column;
-  padding: 40px;
-  row-gap: 20px;
+  display: flex-col;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  // padding: 40px;
+  // row-gap: 20px;
+  max-width: 100%;
   h2 {
-    color: $mui-text-color;
+    color: black;
+    font-family: 'Kalam', cursive;
+    text-align: center;
+    font-size: 2em;
+    margin: 2em;
     text-transform: uppercase;
   }
 }
 
+.doors-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-inline: 1rem;
+}
+
 .subject-nav {
   height: 100vh;
-  padding: 10px;
+  padding: 10px 30px;
   width: 250px;
+  margin-top: 15px;
+  border-right: 0.2px dashed;
   h2 {
     padding: 10px;
-    border-bottom: 1px solid $accent-color-light;
+    text-align: center;
+    border-bottom: 2px solid $accent-color-light;
   }
-  background-color: $background-color;
+  background-color: transparent;
 }
 
 #subject-links-container {
@@ -30,58 +49,182 @@
 }
 
 #subject-links {
-  margin: 10px 0;
+  margin: 15px 0;
+  padding: 15px 30px;
+  font-family: 'Kalam', cursive;
+  font-size: 0.95em;
+  // background-color: $background-color;
+  color: black;
+  border-radius: 1px;
+  border: 0.2px dashed;
+ 
   // justify-content: start;
   &:hover {
-    background-color: $background-color-light
+    background-color: $background-color
   }
 }
 .subject-link-icon {
   margin-right: 10px;
 }
 
-.mainRoom {
-  color: $mui-text-color-dark;
-  border: 1px solid black;
-  padding: 10px;
-  border-radius: 10px;
-  border-color: $accent-color-light;
-  border-width: 1px;
-  background-color: $card-background;
-  text-align: center;
-  transition: all 0.2s;
-  box-shadow: 0px 0px $accent-shadow;
-  &:hover {
-    transform: scale(1.1);
-    box-shadow: 1px 1px $accent-shadow;
-  }
+// .mainRoom {
+//   color: $mui-text-color-dark;
+//   border: 1px solid black;
+//   padding: 10px;
+//   border-radius: 10px;
+//   border-color: $accent-color-light;
+//   border-width: 1px;
+//   background-color: $card-background;
+//   text-align: center;
+//   transition: all 0.2s;
+//   box-shadow: 0px 0px $accent-shadow;
+//   &:hover {
+//     transform: scale(1.1);
+//     box-shadow: 1px 1px $accent-shadow;
+//   }
+// }
+
+.frame {
+  margin: .5em auto;
+  border: solid 1em $background-color;
+  width: auto;
+  height: auto;
+  perspective: 1000px;
+  border-bottom: none;
+  position: relative;
+  box-shadow: 0px 15px 5px rgba(128, 128, 128, 0.43);
+  &.frame--preserve-3d { transform-style: preserve-3d }
+
+      cursor: pointer;
 }
 
-.roomInfo {
-  color: $mui-text-color-dark;
-  border: 1px solid black;
-  padding: 10px;
-  border-radius: 10px;
-  border-color: $accent-color-light;
-  border-width: 1px;
-  background-color: $card-background;
-  text-align: center;
-  transition: all 0.2s;
-  box-shadow: 0px 0px 3px 2px $accent-shadow;
-  span {
-    font-weight: 700;
-  }
-  button {
-    margin: 5px;
-  }
+.mainRoom {
+  background-color: $background-color-light;
+  position:relative;
+  display: flex;
+  width:200px;
+  height:300px;
+  margin: 0 auto;
+  font-family: 'Kalam', cursive;
+  font-size: 0.95em;
+  cursor: auto;
+  
 }
 
 #main-button {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  padding-top: 6px;
-  padding-bottom: 3px;
+  align-items: center;
+  gap: 2rem;
+  height: 100%;
+  width: 100%;
+  border: 1px solid gray;
+
+  font-family: 'Kalam', cursive;
+  font-size: 0.95em;
+  // background-color: $background-color;
+  color: black;
+  background-color: transparent;
+
 }
+
+#saveMyRoomBtn{
+  background-color: white;
+  color: black;
+  font-family: 'Kalam', cursive;
+  font-size: 0.95em;
+}
+
+#joinRoomBtn{
+  background-color: white;
+  color: black;
+  font-family: 'Kalam', cursive;
+  font-size: 0.95em;
+}
+
+.roomInfo {
+  display: flex;
+  background-color: rgb(222, 243, 251);
+  position:absolute;
+
+  border: 1px solid rgb(153, 160, 195);
+  top:0px;
+  left:0px;
+  width:200px;
+  height:300px;
+  transform-origin: left;
+  /*Speed of the Door animation*/
+  transform-style: preserve-3d;
+  transition: all 1.2s;
+  cursor: auto;
+  font-family: 'Kalam', cursive;
+  font-size: 0.95em;
+
+
+  // span {
+  //   word-wrap: break-word;
+  //   font-family: 'Kalam', cursive;
+  //   font-size: 1.5em;
+  //   color: black;
+  // }
+
+  p{
+    text-align: center;
+    margin-top: 4em;
+    padding: 1em;
+    color: rgb(0, 0, 0);
+    word-wrap: break-word;
+    font-family: 'Kalam', cursive;
+    font-size: 1.5em;
+  }
+}
+
+// .infoSpans{
+//   padding: 15px;
+//   padding-top: 5em;
+//   border: 1px solid;
+//   flex: 1;
+//   word-wrap: break-word;
+//   justify-content: center;
+//   gap: 1em;
+//   color: rgb(74, 74, 74)
+// }
+
+
+.roomInfo:hover{
+   /*prespectiv creates the door open effect*/
+   transform: perspective(1200px) translateZ(0px) translateX(0px) translateY(0px) rotateY(-105deg);
+}
+
+
+
+
+// .roomInfo {
+//   color: $mui-text-color-dark;
+//   border: 1px solid black;
+//   padding: 10px;
+//   border-radius: 10px;
+//   border-color: $accent-color-light;
+//   border-width: 1px;
+//   background-color: $card-background;
+//   text-align: center;
+//   transition: all 0.2s;
+//   box-shadow: 0px 0px 3px 2px $accent-shadow;
+//   span {
+//     font-weight: 700;
+//   }
+//   button {
+//     margin: 5px;
+//   }
+// }
+
+// #main-button {
+//   display: flex;
+//   justify-content: center;
+//   padding-top: 6px;
+//   padding-bottom: 3px;
+// }
 
 #no-subject {
   font-size: 20px;
@@ -96,24 +239,24 @@
 
 /* New sidebar styling */
 
-#subj-btn {
-  border-radius: 0;
-  display: block;
-  border: 1px red solid;
-  background-color: rgb(162, 205, 242);
-  color: black;
-  font-family: 'Reenie Beanie', cursive;
-  font-size: 1.7rem;
+// #subj-btn {
+//   border-radius: 0;
+//   display: block;
+//   border: 1px red solid;
+//   background-color: rgb(162, 205, 242);
+//   color: black;
+//   font-family: 'Reenie Beanie', cursive;
+//   font-size: 1.7rem;
 
-}
+// }
 
-.push-pin {
-  float: left;
-  border: 1px red solid;
-  color: rgb(48, 46, 44);
-}
+// .push-pin {
+//   float: left;
+//   border: 1px red solid;
+//   color: rgb(48, 46, 44);
+// }
 
-.push-pin:hover{
-    transition: transform 0.3s ease-in-out;
-    transform: rotateZ(-45deg) scale(2.5);
-  }
+// .push-pin:hover{
+//     transition: transform 0.3s ease-in-out;
+//     transform: rotateZ(-45deg) scale(2.5);
+//   }
