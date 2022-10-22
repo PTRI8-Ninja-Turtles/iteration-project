@@ -8,9 +8,6 @@ import '../stylesheets/main.scss';
 
 const socket = io.connect(SERVER);
 
-
-const messages = [{content: 'Hey man, What\'s up ?', pos: 'left', un:'someone'}, {content: 'Hey, Iam Good! What about you ?', pos: 'right', un:'someone'}, {content: 'Cool. i am good, let\'s catch up!', pos: 'left', un:'someone'} ]; 
-
 // const useStyles = styled({
 //   messageArea: {
 //     height: '70vh',
@@ -19,22 +16,16 @@ const messages = [{content: 'Hey man, What\'s up ?', pos: 'left', un:'someone'},
 // });
   
 
-function MessageArea( username ) {
+function MessageArea( {username, info} ) {
   const [newMessage, setNewMsg] = useState('');
-  const [allMsg, setAllMsg] = useState(messages);
-  const myUsername = username.username.username.username;
+  const [allMsg, setAllMsg] = useState([]);
+
 
   useEffect(() => {
-    socket.on('connection', (socket) => {
-      console.log('connected!');
-      socket.emit('chat message', 'test');
-    } );
   }, []);
 
-
-
   const msgCmp = allMsg.map((val, i) => {
-    const pos =  val.un === myUsername ? 'right' : 'left'; 
+    const pos =  val.un === username ? 'right' : 'left'; 
     return (
       <ListItem key={i + 1}>
         <Grid container>
@@ -62,18 +53,18 @@ function MessageArea( username ) {
   };
   // const classes = useStyles();
 
-
+  socket.on('connect', (socket) => {
+    console.log('connect to socket - client')
+  });
 
   const sendMsg = (e) => {
-    console.log('inside sendMsg', newMessage);
     const msg = newMessage;
-    console.log('inside sendMsg', myUsername);
-    socket.emit('chat message', {content: msg, un: myUsername});
+    socket.emit('chat message', {content: msg, un: username});
     setNewMsg('');
   };
 
   socket.on('message', message => {
-    console.log('msg getting from front end ->', message);
+    // console.log('msg getting from front end ->', message);
     setAllMsg([...allMsg, {content: message.content, un: message.un}]);
   });
 

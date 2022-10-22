@@ -7,23 +7,12 @@ function RoomCard( { info, id, username } ) {
   const [roomInfoBoolean, setRoomInfoBoolean] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  // const textOnSubmit = event => {
-  //   event.preventDefault();
-  //   setName((prevName) => {return newName})
-  // }
-
   // create a new patch request function to add clicked user as "allowed user" to show all users in the room
   async function joinRoom () {
     const roomid = info._id;
     const options = {method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({'newUser': `${username}`})};
     await fetch(`/api/rooms/newUser/${roomid}`, options);
   }
-
-
-  // function handleChange() {
-  //   newName = event.target.value
-  //   return event.target.value
-  // }
 
   async function saveRoom () {
     const options = {method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({'savedRooms': `${info._id}`})};
@@ -38,18 +27,7 @@ function RoomCard( { info, id, username } ) {
 
   const mainRoom = (
     <div className="mainRoom" onClick={showRoomInfo}>
-      {/* <div > */}
-      {/* <div>
-          <img src='https://csunshinetoday.csun.edu/wp-content/uploads/Math4-web.jpg' width="192" height="144"/>
-        </div> */}
       {info.host.nickname} Room
-      {/* <InfoIcon fontSize="small" onClick={showRoomInfo}></InfoIcon> */}
-      {/* </div> */}
-      {/* <form>
-        <input id="nameInput" type="text" placeholder="Your Name Here" onChange={handleChange}></input>
-        <button id="onSubmitButton" onClick={textOnSubmit}>Enter</button>
-        <button id="showRoomInfo" onClick={showRoomInfo}>Show Room Info</button>
-      </form> */}
     </div>
   );
 
