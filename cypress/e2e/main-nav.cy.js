@@ -17,12 +17,11 @@ context('main navbar', () => {
   // });
 
   specify('should have main navbar and each button should take you to the proper page', () => {
-    cy.get('#home-link').should('exist').and('have.text', 'Home');
     cy.get('#logout-link').should('exist').and('have.text', 'Logout');
 
     cy.get('#profile-link').should('exist').and('have.text', 'Profile').click();
     cy.location('pathname').should('eq', '/main/profile');
-    cy.get('#home-link').should('exist').and('have.text', 'Home').click();
+    cy.get('.logo').should('exist').click();
     cy.location('pathname').should('eq', '/main/home');
 
     // cy.get('#settings-link').should('exist').and('have.text', 'Settings').click();
@@ -73,7 +72,7 @@ context('main navbar', () => {
     // cy.get('#room-editor-modal-btns > button').contains('Cancel').click();
 
     // join room
-    cy.get('#home-link').click();
+    cy.get('.logo').click();
     cy.location('pathname').should('eq', '/main/home');
     cy.get('button').contains('miscellaneous').click();
     cy.contains('test-user Room').click();
