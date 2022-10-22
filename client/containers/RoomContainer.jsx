@@ -51,7 +51,9 @@ function RoomContainer({ subject, id, username }) {
   return (
     <div id='room-container'>
       <h2>Active {subject} Rooms</h2>
-      {!roomCards.length ? noRooms : roomCards}
+      <div className='doors-container'>
+        {!roomCards.length ? noRooms : roomCards}
+      </div>
     </div>
   );
 }

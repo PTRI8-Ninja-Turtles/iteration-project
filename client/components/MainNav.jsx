@@ -10,13 +10,21 @@ function MainNav({ setSubject, setLoggedIn }) {
 
   return (
     <div className='main-nav'>
-      <p className='logo'>stud<span>if</span>y</p>
-      <Link className='main-nav-btn' to='/main/home'><Button onClick={() => setSubject('')} variant="text" id='home-link'>Home</Button></Link>
-      <Link className='main-nav-btn' to='/main/profile'><Button variant="text" id='profile-link'>Profile</Button></Link>
+      <div id='logo-container'>
+        <a href='/main/home'>
+          <p className='logo'>stud<span>if</span>y</p>
+        </a>
+        {/* <p className='logo'>stud<span>if</span>y</p> */}
+      </div>
+
+        {/* <Link className='logo' to='/main/home'><Button onClick={() => setSubject('')} variant="text" id='home-link'>Home</Button></Link> */}
+        {/* <Link className='main-nav-btn' to='/main/profile'><Button variant="text" id='profile-link'>Profile</Button></Link> */}
+      
       {/* since setting is not functional so we decided to hide it */}
       {/* <Link className='main-nav-btn' to='/main/settings'><Button variant="text" id='settings-link'>Settings</Button></Link> */}
-      <div className='logoutbtn'>
-        <Link className='main-nav-btn' to='/' id='logout-link'><Button onClick={logOut} variant="text" id='logout-link' sx={{float: 'right'}}>Logout</Button></Link>
+      <div className='main-nav-btns'>
+        <Link className='profile-btn' to='/main/profile' id='profile-link'><Button variant="text" id='profile-link'>Profile</Button></Link>
+        <Link className='logout-btn' to='/' id='logout-link'><Button onClick={logOut} variant="text" id='logout-link' sx={{float: 'right'}}>Logout</Button></Link>
       </div>
     </div>
   );
