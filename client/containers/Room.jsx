@@ -8,7 +8,7 @@ const SERVER = 'http://127.0.0.1:3000';
 const socket = io.connect(SERVER);
 
 
-function Room( username ) {
+function Room( {username} ) {
   const [hostInfo, setHost] = useState({});
   const [hostView, setHostView] = useState(false);
   const [info, setInfo] = useState({});
@@ -55,10 +55,10 @@ function Room( username ) {
   // set host and set cookie for room
   useEffect(() => {
     if (info.host) fetchHost();
-    console.log('info', info);
+    console.log('info ->', info);
     // if info was read from state then save id
     if (state) saveRoom();
-    console.log('hostview', hostView);
+    console.log('hostview ->', hostView);
   }, [info]);
 
   return (
@@ -68,7 +68,7 @@ function Room( username ) {
       </div>
       <br />
       <br />
-      <Chatbox username={username} />
+      <Chatbox username={username} info={info}/>
       {/* <DocumentEditor hostView={hostView}/> */}
       {/* <Chatbox /> */}
       <br />
